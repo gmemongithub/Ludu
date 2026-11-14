@@ -1,0 +1,21 @@
+from playwright.sync_api import sync_playwright
+
+with sync_playwright() as p:
+    browser = p.chromium.launch(headless=True)
+    page = browser.new_page()
+    page.on('console', lambda msg: print('CONSOLE:', msg.text))
+    page.goto('http://localhost:3000')
+    page.click('#btn-open-auth')
+    page.fill('#login-username', 'superadmin')
+    page.fill('#login-password', 'admin123')
+    page.click('#btn-submit-login')
+    page.wait_for_selector('#btn-open-admin')
+    page.click('#btn-open-admin')
+    page.click("button[data-tab='tab-emojis']")
+    page.click('#btn-open-emoji-creator')
+    page.fill('#emoji-input-label', 'Test Star')
+    page.fill('#emoji-input-char', '⭐')
+    page.click('#btn-save-new-emoji')
+    page.wait_for_timeout(2000)
+    print('Grid HTML:', page.inner_html('#admin-emojis-grid'))
+    browser.close()

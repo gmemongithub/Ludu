@@ -1,0 +1,19 @@
+# Node modules & dependencies
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment & runtime
+.env
+.env.local
+
+# Operating System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary test screenshots
+scratch/*.png
+*.png.tmp

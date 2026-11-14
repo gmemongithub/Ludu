@@ -1,0 +1,116 @@
+Created At: 2026-11-13T10:34:50+06:00
+Completed At: 2026-11-13T10:34:54+06:00
+NAME: "Ludo App (Community)"
+
+GLOBAL_VARS:
+fill_658ab2fa:
+  - '#FFFFFF'
+Gradient:
+  - type: GRADIENT_LINEAR
+    gradient: linear-gradient(180deg, rgba(47, 34, 126, 1) 0%, rgba(19, 139, 226, 1) 50%, rgba(47, 34, 126, 1) 100%)
+fill_4ad0d285:
+  - '#5F8FF2'
+layout_5c7de2e9:
+  mode: none
+  sizing: {}
+  locationRelativeToParent:
+    x: 8
+    y: 8
+  dimensions:
+    width: 56
+    height: 56
+style_f14627b2:
+  fontFamily: Roboto
+  fontStyle: Medium
+  fontWeight: 500
+  fontSize: 12
+  textAlignHorizontal: LEFT
+  textAlignVertical: TOP
+Text Shadow:
+  textShadow: 1px 1px 0px 0px rgba(0, 0, 0, 0.43)
+layout_3bf67e8f:
+  mode: none
+  sizing: {}
+  locationRelativeToParent:
+    x: 62
+    y: 8
+  dimensions:
+    width: 56
+    height: 56
+
+ELEMENTS:
+EL-3b32fd31:
+  type: RECTANGLE
+  layout:
+    mode: none
+    sizing: {}
+    locationRelativeToParent:
+      x: 0
+      y: 0
+    dimensions:
+      width: 126
+      height: 90
+  fills:
+    - '#1F3875'
+  strokes: fill_4ad0d285
+  strokeWeight: 1px
+  borderRadius: 4px
+EL-b226f2d4:
+  type: IMAGE-SVG
+  layout:
+    mode: none
+    sizing: {}
+    locationRelativeToParent:
+      x: 72
+      y: 8
+    dimensions:
+      width: 46
+      height: 56
+  borderRadius: 0px 0px 0px 0px
+EL-d62db467:
+  type: IMAGE-SVG
+  layout:
+    mode: none
+    sizing: {}
+    locationRelativeToParent:
+      x: 8
+      y: 8
+    dimensions:
+      width: 46
+      height: 56
+  borderRadius: 0px 0px 0px 0px
+
+NODES:
+[FRAME] "Game Table" #54:1747 layout={"mode":"none","sizing":{}} fills=fill_658ab2fa
+  [RECTANGLE] "bg" #54:1748 layout={"mode":"none","sizing":{},"locationRelativeToParent":{"x":0,"y":0},"dimensions":{"width":375,"height":812}} fills=Gradient
+  [IMAGE-SVG] "Texture" #94:4862 layout={"mode":"none","sizing":{},"locationRelativeToParent":{"x":-1,"y":0},"dimensions":{"width":376,"height":812}}
+  [IMAGE-SVG] #54:1749 layout={"mode":"none","sizing":{},"locationRelativeToParent":{"x":0,"y":218},"dimensions":{"width":375,"height":376}} effects={"boxShadow":"0px 4px 4px 0px rgba(0, 0, 0, 0.58)"} borderRadius="0px 0px 0px 0px"
+  [GROUP] #54:1946 layout={"mode":"none","sizing":{},"locationRelativeToParent":{"x":10,"y":112},"dimensions":{"width":126,"height":90}} borderRadius="0px 0px 0px 0px"
+    [RECTANGLE] #54:1947 template=EL-3b32fd31
+    [RECTANGLE] #54:1948 layout=layout_5c7de2e9 fills=[{"type":"IMAGE","imageRef":"f986ae5633bfa22fdb5ff8173a515ef84e91044e","scaleMode":"FILL","objectFit":"cover","isBackground":false,"imageDownloadArguments":{"needsCropping":false,"requiresImageDimensions":false}}] strokes=fill_4ad0d285 strokeWeight=1px borderRadius=4px
+    [IMAGE-SVG] #54:1949 template=EL-b226f2d4
+    [TEXT] #54:1962 layout={"mode":"none","sizing":{},"locationRelativeToParent":{"x":8,"y":70},"dimensions":{"width":71,"height":14}} fills=fill_658ab2fa effects="Text Shadow" textStyle=style_f14627b2 text="Pranav Goyal"
+  [GROUP] #54:1963 layout={"mode":"none","sizing":{},"locationRelativeToParent":{"x":10,"y":610},"dimensions":{"width":126,"height":90}} borderRadius="0px 0px 0px 0px"
+    [RECTANGLE] #54:1964 template=EL-3b32fd31
+    [RECTANGLE] #54:1965 layout=layout_5c7de2e9 fills=[{"type":"IMAGE","imageRef":"553b894bc4263d265ddce955ac4b9ec3074db5f3","scaleMode":"FILL","objectFit":"cover","isBackground":false,"imageDownloadArguments":{"needsCropping":false,"requiresImageDimensions":false}}] strokes=fill_4ad0d285 strokeWeight=1px borderRadius=4px
+    [IMAGE-SVG] #54:1966 template=EL-b226f2d4
+    [TEXT] #54:1981 layout={"mode":"none","sizing":{},"locationRelativeToParent":{"x":8,"y":70},"dimensions":{"width":57,"height":14}} fills=fill_658ab2fa effects="Text Shadow" textStyle=style_f14627b2 text="Anika Jain"
+  [GROUP] #54:1982 layout={"mode":"none","sizing":{},"locationRelativeToParent":{"x":239,"y":610},"dimensions":{"width":126,"height":90}} borderRadius="0px 0px 0px 0px"
+    [RECTANGLE] #54:1983 template=EL-3b32fd31
+    [TEXT] #54:1984 layout={"mode":"none","sizing":{},"locationRelativeToParent":{"x":8,"y":68},"dimensions":{"width":81,"height":14}} fills=fill_658ab2fa effects="Text Shadow" textStyle=style_f14627b2 text="Dayaram Mand"
+    [RECTANGLE] #54:1985 layout=layout_3bf67e8f fills=[{"type":"IMAGE","imageRef":"c6e914e794444d98d5fb5eb7721ee76b8958e2ec","scaleMode":"FILL","objectFit":"cover","isBackground":false,"imageDownloadArguments":{"needsCropping":false,"requiresImageDimensions":false}}] strokes=fill_4ad0d285 strokeWeight=1px borderRadius=4px
+    [IMAGE-SVG] #54:1986 template=EL-d62db467
+  [RECTANGLE] #94:8111 layout={"mode":"none","sizing":{},"locationRelativeToParent":{"x":0,"y":0},"dimensions":{"width":375,"height":50}} fills=[{"type":"GRADIENT_LINEAR","gradient":"linear-gradient(180deg, rgba(18, 56, 118, 1) 0%, rgba(38, 99, 201, 1) 43%, rgba(59, 118, 216, 1) 77%, rgba(85, 138, 225, 1) 91%, rgba(33, 87, 177, 1) 100%)"}]
+  [GROUP] #54:2002 layout={"mode":"none","sizing":{},"locationRelativeToParent":{"x":239,"y":112},"dimensions":{"width":126,"height":90}} borderRadius="0px 0px 0px 0px"
+    [RECTANGLE] #54:2003 template=EL-3b32fd31
+    [RECTANGLE] #54:2004 layout=layout_3bf67e8f fills=[{"type":"IMAGE","imageRef":"858c5f8ec2ffb75bbfb55057f271c26a6dffab5d","scaleMode":"FILL","objectFit":"cover","isBackground":false,"imageDownloadArguments":{"needsCropping":false,"requiresImageDimensions":false}}] strokes=fill_4ad0d285 strokeWeight=1px borderRadius=4px
+    [IMAGE-SVG] #54:2005 template=EL-d62db467
+    [TEXT] #54:2019 layout={"mode":"none","sizing":{},"locationRelativeToParent":{"x":8,"y":68},"dimensions":{"width":83,"height":14}} fills=fill_658ab2fa effects="Text Shadow" textStyle=style_f14627b2 text="Nirmal Thaman"
+  [GROUP] #97:168 layout={"mode":"none","sizing":{},"locationRelativeToParent":{"x":140,"y":10},"dimensions":{"width":95,"height":36.04}} borderRadius="0px 0px 0px 0px"
+    [RECTANGLE] #94:8112 layout={"mode":"none","sizing":{},"locationRelativeToParent":{"x":3,"y":2},"dimensions":{"width":92,"height":26}} fills=[{"type":"GRADIENT_LINEAR","gradient":"linear-gradient(180deg, rgba(55, 182, 253, 1) 0%, rgba(18, 78, 178, 1) 100%)"}] strokes=["#133D79"] strokeWeight=2px borderRadius=15px
+    [TEXT] #94:8113 layout={"mode":"none","sizing":{},"locationRelativeToParent":{"x":59,"y":7},"dimensions":{"width":25,"height":16}} fills=fill_658ab2fa effects={"textShadow":"1px 1px 0px 0px rgba(0, 0, 0, 0.35)"} textStyle={"fontFamily":"Roboto","fontStyle":"Bold","fontWeight":700,"fontSize":14,"textAlignHorizontal":"LEFT","textAlignVertical":"TOP"} text="350"
+    [IMAGE-SVG] "Group" #94:8346 layout={"mode":"none","sizing":{},"locationRelativeToParent":{"x":37,"y":8},"dimensions":{"width":19,"height":14.75}}
+    [IMAGE-SVG] #97:167 layout={"mode":"none","sizing":{},"locationRelativeToParent":{"x":0,"y":20},"dimensions":{"width":35.17,"height":16.04}}
+    [IMAGE-SVG] "Group" #97:82 layout={"mode":"none","sizing":{},"locationRelativeToParent":{"x":3,"y":0},"dimensions":{"width":30,"height":30}}
+  [IMAGE-SVG] "Group" #97:230 layout={"mode":"none","sizing":{},"locationRelativeToParent":{"x":335,"y":10},"dimensions":{"width":30,"height":30}}
+  [IMAGE-SVG] #97:315 layout={"mode":"none","sizing":{},"locationRelativeToParent":{"x":10,"y":10},"dimensions":{"width":30,"height":30}} borderRadius="0px 0px 0px 0px"

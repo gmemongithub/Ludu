@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Ludo App - Live Multiplayer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Mobile Phone Frame Container (Strictly 375-390px Phone Width) -->
+  <div class="mobile-viewport">
+
+    <!-- 0. Account Login Screen (First Entry / Account Login) -->
+    <section id="screen-login" class="screen-view">
+      <div class="login-brand-header">
+        <div class="login-logo-glow">
+          <i class="fa-solid fa-dice-d20"></i>
+        </div>
+        <h1 class="login-title">LUDO <span class="highlight">PRO</span></h1>
+        <p class="login-subtitle">Sign in with your Name & Password</p>
+      </div>
+
+      <div class="login-card-container">
+        <form id="form-first-login" onsubmit="return false;">
+          <div class="login-field-group">
+            <label for="first-login-name"><i class="fa-solid fa-user"></i> Name / Username</label>
+            <input type="text" id="first-login-name" placeholder="Enter name (e.g. Emon or admin)" autocomplete="username" required>
+          </div>
+
+          <div class="login-field-group">
+            <label for="first-login-password"><i class="fa-solid fa-lock"></i> Password</label>
+            <input type="password" id="first-login-password" placeholder="Enter your password" autocomplete="current-password" required>
+          </div>
+
+          <button id="btn-first-login-submit" type="button" class="btn-figma-primary btn-login-glow">
+            <span>Sign In to Account</span> <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </form>
+
+        <div class="login-divider">
+          <span>OR</span>
+        </div>
+
+        <button id="btn-quick-guest" type="button" class="btn-guest-outline">
+          <i class="fa-solid fa-gamepad"></i> Continue as Guest / Join Code
+        </button>
+
+        <div class="login-footer-note">
+          <i class="fa-solid fa-shield-halved"></i> Don't have an account? Ask an Admin for an invite link.
+        </div>
+      </div>
+    </section>
+    
+    <!-- 1. Lobby Screen -->
+    <section id="screen-lobby" class="screen-view hidden">
+      <div class="app-topbar">
+        <div class="brand-title">LUDO <span class="highlight">PRO</span></div>
+        <div class="topbar-user-section" id="topbar-user-section">
+          <!-- Populated by JS: User Badge, Admin Button, Login Button -->
+          <button id="btn-open-auth" class="btn-topbar-pill">👤 Sign In</button>
+          <button id="btn-sound-toggle-lobby" class="btn-topbar-icon" title="Toggle Sound">🔊</button>
+        </div>
+      </div>
+
+      <div class="lobby-content">
+        <div class="lobby-badge">Mobile 2-Player Edition</div>
+        <h1 class="lobby-heading">Play Live Ludo</h1>
+        <p class="lobby-subtitle">Real-time multiplayer with diagonal cross matching.</p>
+
+        <div class="input-card">
+          <label for="input-player-name">Player Name</label>
+          <input type="text" id="input-player-name" placeholder="Enter name..." maxlength="12" value="Emon">
+        </div>
+
+        <div class="lobby-actions-grid">
+          <button id="btn-create-room" class="btn-figma-primary">Create Room</button>
+          
+          <div class="join-box">
+            <input type="text" id="input-room-code" placeholder="CODE" maxlength="4" style="text-transform: uppercase;">
+            <button id="btn-join-room" class="btn-figma-secondary">Join</button>
+          </div>
+        </div>
+
+        <div class="lobby-footer-tags">
+          <span>24/7 Always-On</span>
+          <span>•</span>
+          <span>AI Bots</span>
+          <span>•</span>
+          <span>Pixel-Perfect</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Waiting Room Screen -->
+    <section id="screen-waiting" class="screen-view hidden">
+      <div class="app-topbar">
+        <button id="btn-back-to-lobby" class="btn-topbar-icon" title="Back to Lobby"><i class="fa-solid fa-arrow-left"></i></button>
+        <div class="room-pill"><i class="fa-solid fa-gamepad" style="margin-right:4px;"></i> ROOM: <span id="waiting-room-code">----</span></div>
+        <button id="btn-copy-invite" class="btn-topbar-icon" title="Copy Invite Link"><i class="fa-solid fa-copy"></i></button>
+      </div>
+
+      <div class="waiting-content">
+        <h2>Waiting for Players</h2>
+
+        <!-- Beautiful Modern Hero Copy Room Link Card -->
+        <div class="room-invite-card-hero">
+          <div class="invite-header-row">
+            <span class="invite-badge"><i class="fa-solid fa-satellite-dish fa-fade"></i> ROOM CODE</span>
+            <span class="invite-room-code" id="waiting-room-code-hero">----</span>
+          </div>
+          <p class="invite-hint"><i class="fa-solid fa-share-nodes"></i> Share this link with friends to play together!</p>
+          <button id="btn-copy-invite-hero" class="btn-copy-room-link">
+            <span class="copy-btn-icon"><i class="fa-solid fa-copy"></i></span>
+            <span class="copy-btn-text">Copy Room Link</span>
+          </button>
+        </div>
+
+        <div id="waiting-player-list" class="waiting-player-list"></div>
+
+        <div class="waiting-buttons">
+          <button id="btn-add-bot" class="btn-figma-secondary"><i class="fa-solid fa-robot"></i> Add AI Bot</button>
+          <button id="btn-start-game" class="btn-figma-primary" disabled><i class="fa-solid fa-play"></i> Start Match</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Game Table (Figma Node #54:1747 Pixel-to-Pixel UI) -->
+    <section id="screen-game" class="screen-view hidden">
+      
+      <!-- Top Navigation Bar (#94:8111, 375x50) -->
+      <header class="figma-header">
+        <button id="btn-figma-back" class="btn-circle-action" title="Menu">
+          <img src="/figma/btn_back.svg" alt="Menu" width="30" height="30">
+        </button>
+
+        <!-- Coins / Room Code Capsule (#97:168) -->
+        <div class="figma-coins-capsule" id="btn-share-room-trigger" title="Tap to copy room invite">
+          <div class="coin-badge-icon">
+            <img src="/figma/coin_badge.svg" alt="Coin" width="26" height="26">
+          </div>
+          <span class="coin-amount" id="game-room-tag">350</span>
+          <img src="/figma/coin_icon.svg" class="coin-gem" alt="Gem" width="16" height="14">
+        </div>
+
+        <button id="btn-figma-menu" class="btn-circle-action" title="Help / Rules">
+          <img src="/figma/btn_menu.svg" alt="Help" width="30" height="30">
+        </button>
+      </header>
+
+      <!-- Prominent Top Live Chat Toast Banner (Instantly Notifies Both Players!) -->
+      <div id="chat-toast-container" class="chat-toast-container"></div>
+
+      <!-- Main Game Arena -->
+      <div class="game-table-body">
+        
+        <!-- TOP PLAYER ROW (Red & Green) - EXACTLY 16px ABOVE BOARD -->
+        <div class="players-row top-players-row">
+          
+          <!-- Top-Left Player: RED (Inactive in 2P mode) -->
+          <div id="card-red" class="figma-player-card rm-card rm-card-left card-inactive">
+            <div class="rm-card-avatar-col">
+              <div class="rm-avatar-ring-wrap">
+                <svg class="rm-timer-ring-svg" viewBox="0 0 46 46">
+                  <circle class="timer-ring-bg" cx="23" cy="23" r="19" />
+                  <circle class="timer-ring-progress" id="timer-ring-red" cx="23" cy="23" r="19" />
+                </svg>
+                <div class="rm-avatar-frame frame-red">
+                  <span class="rm-avatar-letter">R</span>
+                </div>
+              </div>
+              <div class="player-name-text" id="name-red">Red</div>
+            </div>
+            <div class="rm-card-dice-col">
+              <div class="player-dice-box" id="dice-box-red">
+                <div class="die" id="die-red">
+                  <div class="cube" id="cube-red" data-val="1">
+                    <div class="face face-1"><span class="pip pip-center pip-red"></span></div>
+                    <div class="face face-2"><span class="pip pip-tl"></span><span class="pip pip-br"></span></div>
+                    <div class="face face-3"><span class="pip pip-tl"></span><span class="pip pip-center"></span><span class="pip pip-br"></span></div>
+                    <div class="face face-4"><span class="pip pip-tl"></span><span class="pip pip-tr"></span><span class="pip pip-bl"></span><span class="pip pip-br"></span></div>
+                    <div class="face face-5"><span class="pip pip-tl"></span><span class="pip pip-tr"></span><span class="pip pip-center"></span><span class="pip pip-bl"></span><span class="pip pip-br"></span></div>
+                    <div class="face face-6"><span class="pip pip-tl"></span><span class="pip pip-tr"></span><span class="pip pip-ml"></span><span class="pip pip-mr"></span><span class="pip pip-bl"></span><span class="pip pip-br"></span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Reaction Bubble Anchor -->
+            <div class="rm-reaction-anchor anchor-top-player" id="reaction-anchor-red"></div>
+          </div>
+
+          <!-- Top-Right Player: GREEN (Diagonal Cross Opponent) -->
+          <div id="card-green" class="figma-player-card rm-card rm-card-right">
+            <div class="rm-card-dice-col">
+              <div class="player-dice-box" id="dice-box-green">
+                <div class="die" id="die-green">
+                  <div class="cube" id="cube-green" data-val="1">
+                    <div class="face face-1"><span class="pip pip-center pip-red"></span></div>
+                    <div class="face face-2"><span class="pip pip-tl"></span><span class="pip pip-br"></span></div>
+                    <div class="face face-3"><span class="pip pip-tl"></span><span class="pip pip-center"></span><span class="pip pip-br"></span></div>
+                    <div class="face face-4"><span class="pip pip-tl"></span><span class="pip pip-tr"></span><span class="pip pip-bl"></span><span class="pip pip-br"></span></div>
+                    <div class="face face-5"><span class="pip pip-tl"></span><span class="pip pip-tr"></span><span class="pip pip-center"></span><span class="pip pip-bl"></span><span class="pip pip-br"></span></div>
+                    <div class="face face-6"><span class="pip pip-tl"></span><span class="pip pip-tr"></span><span class="pip pip-ml"></span><span class="pip pip-mr"></span><span class="pip pip-bl"></span><span class="pip pip-br"></span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="rm-card-avatar-col">
+              <div class="rm-avatar-ring-wrap">
+                <svg class="rm-timer-ring-svg" viewBox="0 0 46 46">
+                  <circle class="timer-ring-bg" cx="23" cy="23" r="19" />
+                  <circle class="timer-ring-progress" id="timer-ring-green" cx="23" cy="23" r="19" />
+                </svg>
+                <div class="rm-avatar-frame frame-green">
+                  <span class="rm-avatar-letter">A</span>
+                </div>
+              </div>
+              <div class="player-name-text" id="name-green">Alex</div>
+            </div>
+            <!-- Reaction Bubble Anchor -->
+            <div class="rm-reaction-anchor anchor-top-player" id="reaction-anchor-green"></div>
+          </div>
+
+        </div>
+
+        <!-- CENTER: FIGMA LUDO BOARD (#54:1749: 375x376px) -->
+        <div class="board-container">
+          <div id="game-board-container" class="figma-board-wrapper"></div>
+        </div>
+
+        <!-- BOTTOM PLAYER ROW (Blue & Yellow) - EXACTLY 16px BELOW BOARD -->
+        <div class="players-row bottom-players-row">
+          
+          <!-- Bottom-Left Player: BLUE (You) -->
+          <div id="card-blue" class="figma-player-card rm-card rm-card-left active-turn-pulse">
+            <div class="rm-card-avatar-col">
+              <div class="rm-avatar-ring-wrap">
+                <svg class="rm-timer-ring-svg" viewBox="0 0 46 46">
+                  <circle class="timer-ring-bg" cx="23" cy="23" r="19" />
+                  <circle class="timer-ring-progress" id="timer-ring-blue" cx="23" cy="23" r="19" />
+                </svg>
+                <div class="rm-avatar-frame frame-blue">
+                  <span class="rm-avatar-letter">E</span>
+                </div>
+              </div>
+              <div class="player-name-text" id="name-blue">Emon</div>
+            </div>
+            <div class="rm-card-dice-col">
+              <div class="player-dice-box interactive-dice" id="dice-box-blue">
+                <div class="die" id="die-blue">
+                  <div class="cube" id="cube-blue" data-val="1">
+                    <div class="face face-1"><span class="pip pip-center pip-red"></span></div>
+                    <div class="face face-2"><span class="pip pip-tl"></span><span class="pip pip-br"></span></div>
+                    <div class="face face-3"><span class="pip pip-tl"></span><span class="pip pip-center"></span><span class="pip pip-br"></span></div>
+                    <div class="face face-4"><span class="pip pip-tl"></span><span class="pip pip-tr"></span><span class="pip pip-bl"></span><span class="pip pip-br"></span></div>
+                    <div class="face face-5"><span class="pip pip-tl"></span><span class="pip pip-tr"></span><span class="pip pip-center"></span><span class="pip pip-bl"></span><span class="pip pip-br"></span></div>
+                    <div class="face face-6"><span class="pip pip-tl"></span><span class="pip pip-tr"></span><span class="pip pip-ml"></span><span class="pip pip-mr"></span><span class="pip pip-bl"></span><span class="pip pip-br"></span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Reaction Bubble Anchor -->
+            <div class="rm-reaction-anchor anchor-bottom-player" id="reaction-anchor-blue"></div>
+          </div>
+
+          <!-- Bottom-Right Player: YELLOW (Inactive in 2P mode) -->
+          <div id="card-yellow" class="figma-player-card rm-card rm-card-right card-inactive">
+            <div class="rm-card-dice-col">
+              <div class="player-dice-box" id="dice-box-yellow">
+                <div class="die" id="die-yellow">
+                  <div class="cube" id="cube-yellow" data-val="1">
+                    <div class="face face-1"><span class="pip pip-center pip-red"></span></div>
+                    <div class="face face-2"><span class="pip pip-tl"></span><span class="pip pip-br"></span></div>
+                    <div class="face face-3"><span class="pip pip-tl"></span><span class="pip pip-center"></span><span class="pip pip-br"></span></div>
+                    <div class="face face-4"><span class="pip pip-tl"></span><span class="pip pip-tr"></span><span class="pip pip-bl"></span><span class="pip pip-br"></span></div>
+                    <div class="face face-5"><span class="pip pip-tl"></span><span class="pip pip-tr"></span><span class="pip pip-center"></span><span class="pip pip-bl"></span><span class="pip pip-br"></span></div>
+                    <div class="face face-6"><span class="pip pip-tl"></span><span class="pip pip-tr"></span><span class="pip pip-ml"></span><span class="pip pip-mr"></span><span class="pip pip-bl"></span><span class="pip pip-br"></span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="rm-card-avatar-col">
+              <div class="rm-avatar-ring-wrap">
+                <svg class="rm-timer-ring-svg" viewBox="0 0 46 46">
+                  <circle class="timer-ring-bg" cx="23" cy="23" r="19" />
+                  <circle class="timer-ring-progress" id="timer-ring-yellow" cx="23" cy="23" r="19" />
+                </svg>
+                <div class="rm-avatar-frame frame-yellow">
+                  <span class="rm-avatar-letter">Y</span>
+                </div>
+              </div>
+              <div class="player-name-text" id="name-yellow">Yellow</div>
+            </div>
+            <!-- Reaction Bubble Anchor -->
+            <div class="rm-reaction-anchor anchor-bottom-player" id="reaction-anchor-yellow"></div>
+          </div>
+
+        </div>
+
+        <!-- Bottom Action Toast -->
+        <div id="game-status-action" class="figma-status-toast">
+          Tap your 3D dice to roll!
+        </div>
+
+        <!-- Rollmates Floating Action Buttons (Green Chat 💬 & Yellow Emoji 😊) -->
+        <div class="rollmates-social-bar">
+          <button id="btn-open-chat" class="rm-circle-btn rm-btn-green" title="Open Chat">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z" fill="#FFFFFF"/>
+              <circle cx="8" cy="10" r="1.5" fill="#16a34a"/>
+              <circle cx="12" cy="10" r="1.5" fill="#16a34a"/>
+              <circle cx="16" cy="10" r="1.5" fill="#16a34a"/>
+            </svg>
+            <span id="chat-unread-badge" class="chat-unread-badge hidden"></span>
+          </button>
+          
+          <button id="btn-open-emoji" class="rm-circle-btn rm-btn-yellow" title="Send Live Reaction">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" fill="#FFFFFF"/>
+              <circle cx="8.5" cy="9.5" r="1.5" fill="#d97706"/>
+              <circle cx="15.5" cy="9.5" r="1.5" fill="#d97706"/>
+              <path d="M8 14C8.8 16 10.2 17 12 17C13.8 17 15.2 16 16 14" stroke="#d97706" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span id="emoji-cooldown-badge" class="emoji-cooldown-badge hidden"></span>
+          </button>
+        </div>
+
+        <!-- Rollmates Emoji Reaction Popup Dock -->
+        <div id="emoji-reaction-dock" class="rm-emoji-dock hidden">
+          <div class="rm-dock-header">
+            <span>Send Live Emoji</span>
+            <button id="btn-close-emoji-dock" class="btn-close-dock">✕</button>
+          </div>
+          <div class="rm-emoji-grid">
+            <button class="rm-emoji-btn" data-emoji="😂">😂</button>
+            <button class="rm-emoji-btn" data-emoji="🔥">🔥</button>
+            <button class="rm-emoji-btn" data-emoji="😎">😎</button>
+            <button class="rm-emoji-btn" data-emoji="👑">👑</button>
+            <button class="rm-emoji-btn" data-emoji="👏">👏</button>
+            <button class="rm-emoji-btn" data-emoji="🎲">🎲</button>
+            <button class="rm-emoji-btn" data-emoji="🎉">🎉</button>
+            <button class="rm-emoji-btn" data-emoji="😡">😡</button>
+            <button class="rm-emoji-btn" data-emoji="😱">😱</button>
+            <button class="rm-emoji-btn" data-emoji="❤️">❤️</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Slide-Out Menu / Chat Modal -->
+      <div id="modal-menu" class="figma-modal-drawer hidden">
+        <div class="drawer-header">
+          <h3>Quick Chat & Room</h3>
+          <button id="btn-close-drawer" class="btn-close-x">✕</button>
+        </div>
+        <div class="drawer-body">
+          <div class="room-share-card">
+            <div class="room-share-info">
+              <span class="room-share-tag"><i class="fa-solid fa-gamepad"></i> ROOM CODE</span>
+              <strong id="drawer-room-code" class="room-share-code">----</strong>
+            </div>
+            <button id="btn-copy-drawer-link" class="btn-copy-room-link-drawer">
+              <i class="fa-solid fa-copy"></i> Copy Link
+            </button>
+          </div>
+          <div class="quick-phrase-row">
+            <span class="rx-pill">Good Game! 👏</span>
+            <span class="rx-pill">Well Played! 🔥</span>
+            <span class="rx-pill">Roll a 6! 🎲</span>
+            <span class="rx-pill">Hurry Up! ⏳</span>
+            <span class="rx-pill">Oops! 😅</span>
+            <span class="rx-pill">Nice move! 🎯</span>
+          </div>
+          <div class="drawer-chat-box" id="chat-messages"></div>
+          <div class="drawer-chat-input-row">
+            <input type="text" id="chat-input" placeholder="Type a message..." maxlength="100">
+            <button id="btn-send-chat" class="btn-send">➤</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rollmates Victory Celebration Modal -->
+      <div id="modal-victory" class="rm-victory-modal hidden">
+        <div class="rm-victory-backdrop"></div>
+        <div class="rm-victory-card">
+          <div class="rm-victory-sunburst"></div>
+          <div class="rm-trophy-wrap">
+            <span class="rm-trophy-emoji">🏆</span>
+            <span class="rm-sparkle s1">✨</span>
+            <span class="rm-sparkle s2">⭐</span>
+          </div>
+          <h2 class="rm-victory-heading">VICTORY!</h2>
+          <div class="rm-victory-badge">MATCH WINNER</div>
+
+          <div class="rm-winner-box">
+            <div class="rm-winner-crown-icon">👑</div>
+            <div class="rm-winner-avatar-disc" id="victory-avatar">E</div>
+            <div class="rm-winner-name-text" id="victory-winner-name">Emon</div>
+            <div class="rm-winner-title-text">Master Ludo Champion</div>
+          </div>
+
+          <div class="rm-reward-ribbon">
+            <span class="rm-reward-coin">🪙</span>
+            <span class="rm-reward-amount">+500 CEZT COINS</span>
+          </div>
+
+          <div class="rm-victory-actions-row">
+            <button id="btn-victory-again" class="btn-victory-primary">Play Again 🔄</button>
+            <button id="btn-victory-home" class="btn-victory-secondary">Lobby 🏠</button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <!-- Global Toast / Copied Pill -->
+  <div id="sys-toast" class="sys-toast hidden">Copied to clipboard!</div>
+
+  <!-- 1. AUTH MODAL (Login / Register / Reset Password) -->
+  <div id="modal-auth" class="sys-modal hidden">
+    <div class="sys-modal-backdrop" id="auth-backdrop"></div>
+    <div class="sys-modal-card">
+      <div class="sys-modal-header">
+        <h3 id="auth-modal-title">Sign In to Ludo PRO</h3>
+        <button class="sys-btn-close" id="btn-close-auth">✕</button>
+      </div>
+      <div class="sys-modal-tabs" id="auth-tabs-row">
+        <button class="sys-tab-btn active" id="tab-btn-login">Sign In</button>
+        <button class="sys-tab-btn" id="tab-btn-register">Register (Invite)</button>
+      </div>
+      
+      <!-- Login Form -->
+      <div class="sys-modal-body" id="auth-view-login">
+        <div class="sys-form-group">
+          <label>Username or Email</label>
+          <input type="text" id="login-username" placeholder="e.g. superadmin">
+        </div>
+        <div class="sys-form-group">
+          <label>Password</label>
+          <input type="password" id="login-password" placeholder="Enter password">
+        </div>
+        <button class="sys-btn-primary" id="btn-submit-login">Sign In</button>
+        <div class="sys-hint-text">Guest player? You can play immediately without signing in!</div>
+      </div>
+
+      <!-- Register Form (Invite Only) -->
+      <div class="sys-modal-body hidden" id="auth-view-register">
+        <div class="sys-form-group">
+          <label>Invite Code / Token <span class="req">*Required</span></label>
+          <input type="text" id="reg-invite-token" placeholder="Paste invite token">
+        </div>
+        <div class="sys-form-group">
+          <label>Username</label>
+          <input type="text" id="reg-username" placeholder="Choose username">
+        </div>
+        <div class="sys-form-group">
+          <label>Display Name</label>
+          <input type="text" id="reg-name" placeholder="Your in-game name">
+        </div>
+        <div class="sys-form-group">
+          <label>Email (Optional)</label>
+          <input type="email" id="reg-email" placeholder="name@example.com">
+        </div>
+        <div class="sys-form-group">
+          <label>Password</label>
+          <input type="password" id="reg-password" placeholder="Choose password">
+        </div>
+        <button class="sys-btn-primary" id="btn-submit-register">Create Account</button>
+      </div>
+
+      <!-- Reset Password View -->
+      <div class="sys-modal-body hidden" id="auth-view-reset">
+        <div class="sys-form-group">
+          <label>Reset Token</label>
+          <input type="text" id="reset-token-input" placeholder="Reset token" readonly>
+        </div>
+        <div class="sys-form-group">
+          <label>New Password</label>
+          <input type="password" id="reset-new-password" placeholder="Enter new password">
+        </div>
+        <button class="sys-btn-primary" id="btn-submit-reset">Reset Password</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. USER PROFILE MODAL -->
+  <div id="modal-profile" class="sys-modal hidden">
+    <div class="sys-modal-backdrop" id="profile-backdrop"></div>
+    <div class="sys-modal-card">
+      <div class="sys-modal-header">
+        <h3>My Profile</h3>
+        <button class="sys-btn-close" id="btn-close-profile">✕</button>
+      </div>
+      <div class="sys-modal-body">
+        <div class="profile-header-badge">
+          <span class="profile-avatar-emoji" id="profile-avatar-display">🎲</span>
+          <div>
+            <h4 id="profile-display-name">Player</h4>
+            <span class="role-pill" id="profile-role-pill">Player</span>
+          </div>
+        </div>
+        <div class="sys-form-group">
+          <label>Display Name</label>
+          <input type="text" id="profile-input-name" maxlength="16">
+        </div>
+        <div class="sys-form-group">
+          <label>Avatar Emoji</label>
+          <input type="text" id="profile-input-avatar" maxlength="4" placeholder="e.g. 👑, 🎯, 🚀">
+        </div>
+        <div class="sys-form-group">
+          <label>Change Password (Optional)</label>
+          <input type="password" id="profile-input-password" placeholder="Leave blank to keep same">
+        </div>
+        <button class="sys-btn-primary" id="btn-save-profile">Save Profile Changes</button>
+        <button class="sys-btn-danger" id="btn-logout" style="margin-top: 10px;">Log Out</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. ADMIN MANAGEMENT DASHBOARD -->
+  <div id="modal-admin-dashboard" class="sys-modal hidden">
+    <div class="sys-modal-backdrop" id="admin-backdrop"></div>
+    <div class="sys-modal-card admin-card-wide">
+      <div class="sys-modal-header">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:20px;">⚙️</span>
+          <h3 id="admin-dashboard-title">Admin Management Panel</h3>
+          <span class="role-pill" id="admin-header-role">Super Admin</span>
+        </div>
+        <button class="sys-btn-close" id="btn-close-admin">✕</button>
+      </div>
+
+      <!-- Admin Navigation Tabs -->
+      <div class="admin-tabs-nav">
+        <button class="admin-tab active" data-tab="tab-users">👥 Users</button>
+        <button class="admin-tab" data-tab="tab-invites">🔗 Invite Links</button>
+        <button class="admin-tab super-admin-only" data-tab="tab-emojis">🎨 Emojis & Sounds</button>
+        <button class="admin-tab super-admin-only" data-tab="tab-messages">💬 Quick Chat</button>
+        <button class="admin-tab super-admin-only" data-tab="tab-history">📜 Match History</button>
+      </div>
+
+      <!-- Tab: Users -->
+      <div class="admin-tab-content" id="tab-users">
+        <div class="admin-toolbar">
+          <button class="btn-sm-primary" id="btn-open-add-user">➕ Add User</button>
+          <span class="admin-counter" id="users-counter">Total Users: 0</span>
+        </div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>User</th>
+                <th>Role</th>
+                <th>Created</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="admin-users-list"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab: Invite Links -->
+      <div class="admin-tab-content hidden" id="tab-invites">
+        <div class="admin-toolbar">
+          <button class="btn-sm-primary" id="btn-gen-invite-link">➕ Generate Sign-Up Link</button>
+          <span class="admin-counter" id="invites-counter">Active Links: 0</span>
+        </div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Invite Token / Link</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="admin-invites-list"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab: Emojis & Sounds (Super Admin Only) -->
+      <div class="admin-tab-content hidden" id="tab-emojis">
+        <div class="admin-toolbar">
+          <button class="btn-sm-primary" id="btn-open-emoji-creator">➕ Upload New Emoji / Sticker</button>
+          <span class="admin-counter" id="emojis-counter">Active Emojis: 0</span>
+        </div>
+        <div class="emoji-admin-grid" id="admin-emojis-grid"></div>
+      </div>
+
+      <!-- Tab: Quick Messages (Super Admin Only) -->
+      <div class="admin-tab-content hidden" id="tab-messages">
+        <div class="admin-toolbar">
+          <div class="admin-inline-input">
+            <input type="text" id="input-new-phrase" placeholder="Type new quick chat phrase..." maxlength="70">
+            <button class="btn-sm-primary" id="btn-add-phrase">Add Phrase</button>
+          </div>
+        </div>
+        <div class="admin-phrases-list" id="admin-phrases-list"></div>
+      </div>
+
+      <!-- Tab: Match History (Super Admin Only) -->
+      <div class="admin-tab-content hidden" id="tab-history">
+        <div class="admin-toolbar">
+          <span class="admin-counter" id="history-counter">Matches Played: 0</span>
+        </div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Room</th>
+                <th>Winner</th>
+                <th>Players</th>
+                <th>Turns</th>
+                <th>Duration</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="admin-history-list"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 4. SUPER ADMIN: EMOJI & STICKER CREATOR MODAL (With Live Preview & Size Slider!) -->
+  <div id="modal-add-emoji" class="sys-modal hidden">
+    <div class="sys-modal-backdrop" id="emoji-creator-backdrop"></div>
+    <div class="sys-modal-card">
+      <div class="sys-modal-header">
+        <h3>Upload Emoji / Animated Sticker</h3>
+        <button class="sys-btn-close" id="btn-close-emoji-creator">✕</button>
+      </div>
+      <div class="sys-modal-body">
+        <div class="sys-form-group">
+          <label>Label / Name</label>
+          <input type="text" id="emoji-input-label" placeholder="e.g. Laughing Fox, Fire Star">
+        </div>
+
+        <div class="sys-form-group">
+          <label>Reaction Type</label>
+          <select id="emoji-select-type">
+            <option value="fontawesome">Font Awesome Gaming Icon</option>
+            <option value="animated">Animated WebM Sticker / Video (.webm)</option>
+            <option value="image">Image / GIF Sticker (PNG, SVG, GIF, WebP)</option>
+            <option value="unicode">Unicode Emoji</option>
+          </select>
+        </div>
+
+        <!-- Font Awesome Icon Selector -->
+        <div class="sys-form-group" id="group-emoji-fa">
+          <label>Font Awesome Icon</label>
+          <select id="emoji-select-fa">
+            <option value="fa-solid fa-fire">🔥 Fire (fa-fire)</option>
+            <option value="fa-solid fa-face-laugh-squint">😂 Laugh (fa-face-laugh-squint)</option>
+            <option value="fa-solid fa-crown">👑 Crown (fa-crown)</option>
+            <option value="fa-solid fa-shield-halved">🛡️ Shield (fa-shield-halved)</option>
+            <option value="fa-solid fa-rocket">🚀 Rocket (fa-rocket)</option>
+            <option value="fa-solid fa-heart">❤️ Heart (fa-heart)</option>
+            <option value="fa-solid fa-champagne-glasses">🎉 Celebration (fa-champagne-glasses)</option>
+            <option value="fa-solid fa-bolt">⚡ Bolt (fa-bolt)</option>
+            <option value="fa-solid fa-star">⭐ Star (fa-star)</option>
+            <option value="fa-solid fa-dice">🎲 Dice (fa-dice)</option>
+            <option value="fa-solid fa-skull">💀 Skull (fa-skull)</option>
+            <option value="fa-solid fa-bomb">💣 Bomb (fa-bomb)</option>
+            <option value="fa-solid fa-thumbs-up">👍 Thumbs Up (fa-thumbs-up)</option>
+            <option value="fa-solid fa-trophy">🏆 Trophy (fa-trophy)</option>
+            <option value="custom">✏️ Custom Icon Class...</option>
+          </select>
+          <input type="text" id="emoji-custom-fa-input" class="hidden" placeholder="e.g. fa-solid fa-dragon" style="margin-top:6px;">
+        </div>
+
+        <!-- Unicode Input -->
+        <div class="sys-form-group hidden" id="group-emoji-unicode">
+          <label>Unicode Emoji Character</label>
+          <input type="text" id="emoji-input-char" value="⭐" maxlength="6" style="font-size: 22px;">
+        </div>
+
+        <!-- File Upload Input (Supports WebM Video & Images) -->
+        <div class="sys-form-group hidden" id="group-emoji-file">
+          <label>Upload Sticker / WebM File (WebM, GIF, PNG, SVG, WebP)</label>
+          <input type="file" id="emoji-file-input" accept="video/webm,.webm,image/png,image/jpeg,image/gif,image/webp,image/svg+xml">
+        </div>
+
+        <!-- Sound Configuration -->
+        <div class="sys-form-group">
+          <label>Sound Effect Configuration</label>
+          <select id="emoji-select-sound-type">
+            <option value="preset">Use Built-in Synthesizer Sound Preset</option>
+            <option value="custom">Upload Custom Voice / Audio Clip (MP3, WAV, OGG)</option>
+          </select>
+        </div>
+
+        <!-- Preset Sound Selector -->
+        <div class="sys-form-group" id="group-sound-preset">
+          <label>Choose Preset Sound</label>
+          <div style="display:flex; gap:6px;">
+            <select id="emoji-select-preset" style="flex:1;">
+              <option value="sparkle_shield">✨ Sparkle Shield (Celestial Star Chime)</option>
+              <option value="cheery_fanfare">🎺 Cheery Fanfare Pop (Spring Launch)</option>
+              <option value="pop">💬 Bubble Pop</option>
+              <option value="digital_blip">⚡ Digital Blip Tick</option>
+              <option value="punch_impact">💥 Punch Impact (Knockout)</option>
+              <option value="victory">🏆 Victory Melody</option>
+              <option value="dice_roll">🎲 Dice Clatter</option>
+            </select>
+            <button class="btn-sm-secondary" id="btn-preview-preset-sound" title="Test Sound">🔊 Test</button>
+          </div>
+        </div>
+
+        <!-- Custom Voice / Audio File Upload -->
+        <div class="sys-form-group hidden" id="group-sound-custom">
+          <label>Upload Voice / Audio File (MP3, WAV, OGG, WebM)</label>
+          <input type="file" id="emoji-audio-file" accept="audio/*,.mp3,.wav,.ogg,.weba,.webm,.m4a,.aac">
+          <button class="btn-sm-secondary hidden" id="btn-preview-custom-audio" style="margin-top:6px;">🔊 Test Uploaded Audio</button>
+        </div>
+
+        <!-- LIVE INTERACTIVE PREVIEW & DISPLAY SIZE SLIDER -->
+        <div class="emoji-preview-section">
+          <label style="font-weight:700; color:#38bdf8; display:flex; justify-content:space-between;">
+            <span>📱 Live Floating Preview & Size:</span>
+            <span id="preview-size-display">48px</span>
+          </label>
+          
+          <div class="emoji-live-preview-box" id="emoji-preview-container">
+            <div class="preview-stage">
+              <div id="emoji-preview-element" class="preview-emoji-flying">⭐</div>
+            </div>
+            <span class="preview-hint">Drag slider below to test exact in-game scale</span>
+          </div>
+
+          <div class="slider-control-row">
+            <span style="font-size:12px; color:#94a3b8;">28px</span>
+            <input type="range" id="emoji-size-slider" min="28" max="96" value="48" step="2">
+            <span style="font-size:12px; color:#94a3b8;">96px</span>
+          </div>
+        </div>
+
+        <!-- Emoji & Music Duration Slider (1s - 15s) -->
+        <div class="sys-form-group" style="margin-top: 14px;">
+          <label style="font-weight:700; color:#f59e0b; display:flex; justify-content:space-between; align-items:center;">
+            <span>⏱️ Display & Music Duration:</span>
+            <span id="preview-duration-display" style="font-size:13px; color:#ffffff; background:#f59e0b; padding:2px 8px; border-radius:8px;">5s</span>
+          </label>
+          <div class="slider-control-row" style="margin-top:6px;">
+            <span style="font-size:12px; color:#94a3b8;">1s</span>
+            <input type="range" id="emoji-duration-slider" min="1" max="15" value="5" step="0.5">
+            <span style="font-size:12px; color:#94a3b8;">15s</span>
+          </div>
+          <div style="font-size:11px; color:#64748b; margin-top:4px;">
+            Adjust how many seconds (1s - 15s) this emoji/sticker stays on the board and its audio plays.
+          </div>
+        </div>
+
+        <button class="sys-btn-primary" id="btn-save-new-emoji" style="margin-top: 14px;">Save Emoji / Sticker</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. CREATE USER DIRECTLY MODAL (FOR ADMIN) -->
+  <div id="modal-admin-create-user" class="sys-modal hidden">
+    <div class="sys-modal-backdrop" id="create-user-backdrop"></div>
+    <div class="sys-modal-card">
+      <div class="sys-modal-header">
+        <h3>Create New User</h3>
+        <button class="sys-btn-close" id="btn-close-create-user">✕</button>
+      </div>
+      <div class="sys-modal-body">
+        <div class="sys-form-group">
+          <label>Username</label>
+          <input type="text" id="admin-new-username" placeholder="Username">
+        </div>
+        <div class="sys-form-group">
+          <label>Display Name</label>
+          <input type="text" id="admin-new-name" placeholder="Full name">
+        </div>
+        <div class="sys-form-group">
+          <label>Email</label>
+          <input type="email" id="admin-new-email" placeholder="Email">
+        </div>
+        <div class="sys-form-group">
+          <label>Role</label>
+          <select id="admin-new-role">
+            <option value="user">Regular User (Player)</option>
+            <option value="general_admin">General Admin</option>
+            <option value="super_admin" class="super-admin-only">Super Admin</option>
+          </select>
+        </div>
+        <div class="sys-form-group">
+          <label>Initial Password</label>
+          <input type="password" id="admin-new-password" placeholder="Password">
+        </div>
+        <button class="sys-btn-primary" id="btn-submit-admin-create-user">Create User</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. MATCH ALREADY STARTED MODAL -->
+  <div id="modal-match-started" class="sys-modal hidden">
+    <div class="sys-modal-backdrop" id="match-started-backdrop"></div>
+    <div class="sys-modal-card" style="text-align: center; max-width: 360px;">
+      <div style="padding: 24px 20px;">
+        <div class="blocked-lock-icon">
+          <i class="fa-solid fa-lock fa-bounce" style="font-size: 42px; color: #f59e0b;"></i>
+        </div>
+        <h3 style="margin: 14px 0 8px; font-size: 18px; color: #f87171;">The Match Has Already Started</h3>
+        <p style="font-size: 13px; color: #94a3b8; line-height: 1.5; margin: 0 0 20px;">
+          This game is currently in active gameplay. New players cannot join once a match is in progress.
+        </p>
+        <button class="sys-btn-primary" id="btn-close-match-started" style="width: 100%;">
+          <i class="fa-solid fa-arrow-left"></i> Back to Lobby
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/gsap.min.js"></script>
+  <script src="/js/audio.js"></script>
+  <script src="/js/board.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

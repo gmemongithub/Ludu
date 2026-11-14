@@ -1,0 +1,465 @@
+{
+  "users": [
+    {
+      "id": "usr_superadmin",
+      "username": "superadmin",
+      "email": "superadmin@ludo.pro",
+      "name": "GM Emon",
+      "role": "super_admin",
+      "avatar": "👑",
+      "passwordHash": "0eaf0b1dcfd48eeb163c8859c4a265f004111d6c8d049e250bb2a4a44197072405b597863397917374533c23d0f1499df16ad7ede51fd27d75a4eb2acb6472b7",
+      "salt": "9e490ecd3e6f999b37bc82daf6a1799a",
+      "active": true,
+      "createdAt": "2026-11-14T04:08:46.821Z"
+    },
+    {
+      "id": "usr_admin",
+      "username": "admin",
+      "email": "admin@ludo.pro",
+      "name": "General Admin",
+      "role": "general_admin",
+      "avatar": "🛡️",
+      "passwordHash": "4002ad09bd21516cade870928c80f8e7638f84d0446a83f54ce3d831c9b2ce9a9496c3d3ba59d17f5b7114fa3baeb99b3b6c1956474abbc5d7b499751f01a4e7",
+      "salt": "86884719cb6932ccddd18aeaf714a03a",
+      "active": true,
+      "createdAt": "2026-11-14T04:53:17.868Z"
+    }
+  ],
+  "inviteTokens": [
+    {
+      "token": "8686080a415dd6e134cbb6ea3273f475",
+      "createdBy": "superadmin",
+      "role": "user",
+      "used": true,
+      "usedBy": "usr_1794629523339_pn49hk",
+      "createdAt": "2026-11-14T04:12:01.283Z",
+      "expiresAt": "2026-11-21T04:12:01.283Z",
+      "usedAt": "2026-11-14T04:12:03.347Z"
+    },
+    {
+      "token": "f3e712c6b490b1612feefbd2a3e8c8b8",
+      "createdBy": "superadmin",
+      "role": "user",
+      "used": false,
+      "usedBy": null,
+      "createdAt": "2026-11-14T04:30:37.872Z",
+      "expiresAt": "2026-11-21T04:30:37.872Z"
+    },
+    {
+      "token": "373cf7bd24405ff3fd5ca71339063141",
+      "createdBy": "superadmin",
+      "role": "user",
+      "used": true,
+      "usedBy": "usr_1794630745448_zn2wlq",
+      "createdAt": "2026-11-14T04:32:23.639Z",
+      "expiresAt": "2026-11-21T04:32:23.639Z",
+      "usedAt": "2026-11-14T04:32:25.459Z"
+    },
+    {
+      "token": "b7c96a9002d460727162e26947c263e9",
+      "createdBy": "superadmin",
+      "role": "user",
+      "used": true,
+      "usedBy": "usr_1794630881528_qb1v07",
+      "createdAt": "2026-11-14T04:34:39.791Z",
+      "expiresAt": "2026-11-21T04:34:39.792Z",
+      "usedAt": "2026-11-14T04:34:41.537Z"
+    },
+    {
+      "token": "7004af2e8c6b4b0e6bc79bb8e8a2eeab",
+      "createdBy": "superadmin",
+      "role": "user",
+      "used": false,
+      "usedBy": null,
+      "createdAt": "2026-11-14T04:37:37.807Z",
+      "expiresAt": "2026-11-21T04:37:37.807Z"
+    }
+  ],
+  "resetTokens": [
+    {
+      "token": "40919f4acd04c9b7671c4555997ddb12",
+      "userId": "usr_1794629523339_pn49hk",
+      "username": "player_test_1",
+      "used": false,
+      "createdAt": "2026-11-14T04:12:05.383Z",
+      "expiresAt": "2026-11-15T04:12:05.383Z"
+    }
+  ],
+  "emojis": [
+    {
+      "id": "fa_fire",
+      "label": "Fire Blaze",
+      "type": "fontawesome",
+      "content": "fa-solid fa-fire",
+      "soundType": "preset",
+      "soundValue": "sparkle_shield",
+      "size": 48,
+      "active": true
+    },
+    {
+      "id": "fa_laugh",
+      "label": "Laugh Out Loud",
+      "type": "fontawesome",
+      "content": "fa-solid fa-face-laugh-squint",
+      "soundType": "preset",
+      "soundValue": "pop",
+      "size": 48,
+      "active": true
+    },
+    {
+      "id": "fa_crown",
+      "label": "Victory Crown",
+      "type": "fontawesome",
+      "content": "fa-solid fa-crown",
+      "soundType": "preset",
+      "soundValue": "victory",
+      "size": 48,
+      "active": true
+    },
+    {
+      "id": "fa_shield",
+      "label": "Guardian Shield",
+      "type": "fontawesome",
+      "content": "fa-solid fa-shield-halved",
+      "soundType": "preset",
+      "soundValue": "sparkle_shield",
+      "size": 48,
+      "active": true
+    },
+    {
+      "id": "fa_rocket",
+      "label": "Turbo Rocket",
+      "type": "fontawesome",
+      "content": "fa-solid fa-rocket",
+      "soundType": "preset",
+      "soundValue": "cheery_fanfare",
+      "size": 48,
+      "active": true
+    },
+    {
+      "id": "fa_heart",
+      "label": "Love Heart",
+      "type": "fontawesome",
+      "content": "fa-solid fa-heart",
+      "soundType": "preset",
+      "soundValue": "pop",
+      "size": 48,
+      "active": true
+    },
+    {
+      "id": "fa_party",
+      "label": "Celebration",
+      "type": "fontawesome",
+      "content": "fa-solid fa-champagne-glasses",
+      "soundType": "preset",
+      "soundValue": "cheery_fanfare",
+      "size": 48,
+      "active": true
+    },
+    {
+      "id": "fa_bolt",
+      "label": "Thunder Bolt",
+      "type": "fontawesome",
+      "content": "fa-solid fa-bolt",
+      "soundType": "preset",
+      "soundValue": "digital_blip",
+      "size": 48,
+      "active": true
+    },
+    {
+      "id": "fa_star",
+      "label": "Super Star",
+      "type": "fontawesome",
+      "content": "fa-solid fa-star",
+      "soundType": "preset",
+      "soundValue": "sparkle_shield",
+      "size": 52,
+      "active": true
+    },
+    {
+      "id": "fa_dice",
+      "label": "Lucky 6 Dice",
+      "type": "fontawesome",
+      "content": "fa-solid fa-dice",
+      "soundType": "preset",
+      "soundValue": "dice_roll",
+      "size": 48,
+      "active": true
+    },
+    {
+      "id": "em_1794632847883_v99di",
+      "label": "Boom Voice",
+      "type": "fontawesome",
+      "content": "fa-solid fa-bomb",
+      "soundType": "custom",
+      "soundValue": "/uploads/audio/audio_1794632847870_590ukc.mp3",
+      "size": 48,
+      "active": true,
+      "createdAt": "2026-11-14T05:07:27.883Z"
+    },
+    {
+      "id": "em_1794635329589_xw0zr",
+      "label": "Happy ☻",
+      "type": "sticker",
+      "content": "/uploads/emojis/sticker_1794635329561_5ekqpo.webm",
+      "soundType": "custom",
+      "soundValue": "/uploads/audio/audio_1794635329575_in6eja.mp3",
+      "size": 86,
+      "active": true,
+      "createdAt": "2026-11-14T05:48:49.589Z"
+    },
+    {
+      "id": "em_1794637706528_ljbbd",
+      "label": "Flame Magic (6s)",
+      "type": "fontawesome",
+      "content": "fa-solid fa-fire",
+      "soundType": "preset",
+      "soundValue": "sparkle_shield",
+      "size": 48,
+      "duration": 6,
+      "active": true,
+      "createdAt": "2026-11-14T06:28:26.529Z"
+    },
+    {
+      "id": "em_1794638036803_o2e98",
+      "label": "Flame Magic (6s)",
+      "type": "fontawesome",
+      "content": "fa-solid fa-fire",
+      "soundType": "preset",
+      "soundValue": "sparkle_shield",
+      "size": 48,
+      "duration": 6,
+      "active": true,
+      "createdAt": "2026-11-14T06:33:56.803Z"
+    }
+  ],
+  "quickMessages": [
+    {
+      "id": "qm_1",
+      "text": "Good Game! 👏",
+      "active": true,
+      "order": 1
+    },
+    {
+      "id": "qm_2",
+      "text": "Well Played! 🔥",
+      "active": true,
+      "order": 2
+    },
+    {
+      "id": "qm_3",
+      "text": "Roll a 6! 🎲",
+      "active": true,
+      "order": 3
+    },
+    {
+      "id": "qm_4",
+      "text": "Hurry Up! ⏳",
+      "active": true,
+      "order": 4
+    },
+    {
+      "id": "qm_5",
+      "text": "Oops! 😅",
+      "active": true,
+      "order": 5
+    },
+    {
+      "id": "qm_6",
+      "text": "Nice move! 🎯",
+      "active": true,
+      "order": 6
+    }
+  ],
+  "matches": [
+    {
+      "id": "mat_1794636373453_opx4k",
+      "roomCode": "6B9F",
+      "startedAt": "2026-11-14T05:33:29.248Z",
+      "endedAt": "2026-11-14T06:06:13.453Z",
+      "players": [
+        {
+          "name": "Emon Test",
+          "color": "blue",
+          "isBot": false,
+          "userId": null
+        },
+        {
+          "name": "Robo-Alex",
+          "color": "green",
+          "isBot": true,
+          "userId": null
+        }
+      ],
+      "winner": {
+        "name": "Emon Test",
+        "color": "blue",
+        "userId": null
+      },
+      "turnsCount": 0,
+      "durationSec": 1964
+    },
+    {
+      "id": "mat_1794636000912_zcan1",
+      "roomCode": "SU42",
+      "startedAt": "2026-11-14T05:25:14.191Z",
+      "endedAt": "2026-11-14T06:00:00.912Z",
+      "players": [
+        {
+          "name": "Super Admin",
+          "color": "blue",
+          "isBot": false,
+          "userId": "usr_superadmin"
+        },
+        {
+          "name": "Robo-Alex",
+          "color": "green",
+          "isBot": true,
+          "userId": null
+        }
+      ],
+      "winner": {
+        "name": "Super Admin",
+        "color": "blue",
+        "userId": "usr_superadmin"
+      },
+      "turnsCount": 0,
+      "durationSec": 2087
+    },
+    {
+      "id": "mat_1794635776093_ro4oo",
+      "roomCode": "VF7B",
+      "startedAt": "2026-11-14T05:22:29.391Z",
+      "endedAt": "2026-11-14T05:56:16.093Z",
+      "players": [
+        {
+          "name": "Emon Test",
+          "color": "blue",
+          "isBot": false,
+          "userId": null
+        },
+        {
+          "name": "Robo-Alex",
+          "color": "green",
+          "isBot": true,
+          "userId": null
+        }
+      ],
+      "winner": {
+        "name": "Emon Test",
+        "color": "blue",
+        "userId": null
+      },
+      "turnsCount": 0,
+      "durationSec": 2027
+    },
+    {
+      "id": "mat_1794635286263_hrbks",
+      "roomCode": "TT3Z",
+      "startedAt": "2026-11-14T05:14:02.279Z",
+      "endedAt": "2026-11-14T05:48:06.264Z",
+      "players": [
+        {
+          "name": "Host",
+          "color": "blue",
+          "isBot": false,
+          "userId": null
+        },
+        {
+          "name": "Robo-Alex",
+          "color": "green",
+          "isBot": true,
+          "userId": null
+        }
+      ],
+      "winner": {
+        "name": "Host",
+        "color": "blue",
+        "userId": null
+      },
+      "turnsCount": 0,
+      "durationSec": 2044
+    },
+    {
+      "id": "mat_1794635052255_y178p",
+      "roomCode": "RUMJ",
+      "startedAt": "2026-11-14T05:07:29.896Z",
+      "endedAt": "2026-11-14T05:44:12.255Z",
+      "players": [
+        {
+          "name": "Admin Host",
+          "color": "blue",
+          "isBot": false,
+          "userId": "usr_superadmin"
+        },
+        {
+          "name": "Opponent",
+          "color": "green",
+          "isBot": false,
+          "userId": null
+        }
+      ],
+      "winner": {
+        "name": "Opponent",
+        "color": "green",
+        "userId": null
+      },
+      "turnsCount": 0,
+      "durationSec": 2202
+    },
+    {
+      "id": "mat_1794635046204_7yeur",
+      "roomCode": "HGES",
+      "startedAt": "2026-11-14T05:13:39.897Z",
+      "endedAt": "2026-11-14T05:44:06.204Z",
+      "players": [
+        {
+          "name": "Host",
+          "color": "blue",
+          "isBot": false,
+          "userId": null
+        },
+        {
+          "name": "Robo-Alex",
+          "color": "green",
+          "isBot": true,
+          "userId": null
+        }
+      ],
+      "winner": {
+        "name": "Host",
+        "color": "blue",
+        "userId": null
+      },
+      "turnsCount": 0,
+      "durationSec": 1826
+    },
+    {
+      "id": "mat_1794633680533_2ywg3",
+      "roomCode": "8PPN",
+      "startedAt": "2026-11-14T05:10:25.382Z",
+      "endedAt": "2026-11-14T05:21:20.533Z",
+      "players": [
+        {
+          "name": "Super Admin",
+          "color": "blue",
+          "isBot": false,
+          "userId": "usr_superadmin"
+        },
+        {
+          "name": "Robo-Alex",
+          "color": "green",
+          "isBot": true,
+          "userId": null
+        }
+      ],
+      "winner": {
+        "name": "Super Admin",
+        "color": "blue",
+        "userId": "usr_superadmin"
+      },
+      "turnsCount": 0,
+      "durationSec": 655
+    }
+  ]
+}
