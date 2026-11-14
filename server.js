@@ -834,11 +834,10 @@ io.on('connection', (socket) => {
     const room = rooms.get(code);
     if (!room) return socket.emit('error_message', 'Room not found.');
 
-    // Check if player is reconnecting
+    // Check if player is reconnecting (strictly by token or userId, never by plain name to avoid guest hijacking)
     const existing = room.players.find(p => 
       (playerToken && p.playerToken === playerToken) ||
-      (userId && p.userId === userId) ||
-      (playerName && p.name && p.name.toLowerCase() === playerName.toLowerCase())
+      (userId && p.userId === userId)
     );
 
     if (existing) {
@@ -885,10 +884,15 @@ io.on('connection', (socket) => {
     const assignedColor = colorSlots[room.players.length];
     const newPlayerToken = crypto.randomBytes(16).toString('hex');
 
+    let finalPlayerName = (playerName || '').trim() || `Player ${room.players.length + 1}`;
+    if (room.players.some(p => p.name && p.name.toLowerCase() === finalPlayerName.toLowerCase())) {
+      finalPlayerName = `${finalPlayerName} (${room.players.length + 1})`;
+    }
+
     const newPlayer = {
       id: socket.id,
       playerToken: newPlayerToken,
-      name: playerName || `Player ${room.players.length + 1}`,
+      name: finalPlayerName,
       color: assignedColor,
       userId: userId || null,
       isHost: false,
@@ -917,8 +921,7 @@ io.on('connection', (socket) => {
 
     const player = room.players.find(p => 
       (playerToken && p.playerToken === playerToken) ||
-      (userId && p.userId === userId) ||
-      (playerName && p.name && p.name.toLowerCase() === playerName.toLowerCase())
+      (userId && p.userId === userId)
     );
 
     if (!player) {
@@ -1100,6 +1103,57 @@ io.on('connection', (socket) => {
       soundType: data.soundType || 'preset',
       soundValue: data.soundValue || 'pop'
     });
+  });
+
+  socket.on('leave_room', () => {
+    if (!userRoomId) return;
+    const room = rooms.get(userRoomId);
+    if (!room) return;
+
+    const playerIndex = room.players.findIndex(p => p.id === socket.id);
+    if (playerIndex === -1) return;
+    const player = room.players[playerIndex];
+
+    const targetRoomId = userRoomId;
+    socket.leave(targetRoomId);
+    userRoomId = null;
+
+    if (room.status === 'waiting') {
+      room.players.splice(playerIndex, 1);
+      if (room.players.length === 0) {
+        rooms.delete(targetRoomId);
+        return;
+      }
+      if (room.host === socket.id && room.players.length > 0) {
+        room.host = room.players[0].id;
+        room.players[0].isHost = true;
+      }
+      room.lastAction = `${player.name} left the room.`;
+      io.to(targetRoomId).emit('game_update', createGameState(room));
+    } else if (room.status === 'playing') {
+      player.connected = false;
+      player.isBot = true;
+      player.eliminated = true;
+      room.lastAction = `👋 ${player.name} left the match. Bot is playing for them.`;
+      io.to(targetRoomId).emit('game_update', createGameState(room));
+
+      const remainingHumans = room.players.filter(p => !p.isBot && !p.eliminated);
+      if (remainingHumans.length === 0) {
+        if (room.turnTimer) clearTimeout(room.turnTimer);
+        rooms.delete(targetRoomId);
+        return;
+      }
+
+      if (room.currentTurn === player.color) {
+        clearRoomTurnTimer(room);
+        if (room.dice.rolled && room.movableTokens && room.movableTokens.length > 0) {
+          const bestMove = selectBotMove(room, room.currentTurn, room.movableTokens, room.dice.value);
+          executeMoveToken(room, bestMove);
+        } else if (!room.dice.rolled) {
+          handleBotTurnIfApplicable(room);
+        }
+      }
+    }
   });
 
   socket.on('disconnect', () => {

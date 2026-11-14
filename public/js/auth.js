@@ -1051,7 +1051,7 @@
       const params = new URLSearchParams(window.location.search);
       const inviteParam = params.get('invite');
       const resetParam = params.get('reset');
-      const joinParam = params.get('join');
+      const roomParam = params.get('room') || params.get('join') || params.get('code');
 
       if (inviteParam) {
         if (screenLogin) screenLogin.classList.add('hidden');
@@ -1061,11 +1061,13 @@
         if (screenLogin) screenLogin.classList.add('hidden');
         if (screenLobby) screenLobby.classList.remove('hidden');
         openAuthModal('reset', resetParam);
-      } else if (joinParam) {
+      } else if (roomParam) {
+        const targetCode = roomParam.toUpperCase().trim();
         if (screenLogin) screenLogin.classList.add('hidden');
         if (screenLobby) screenLobby.classList.remove('hidden');
         const codeInput = document.getElementById('input-room-code');
-        if (codeInput) codeInput.value = joinParam.toUpperCase();
+        if (codeInput) codeInput.value = targetCode;
+        showToast(`Room ${targetCode} invite loaded!`);
       } else {
         if (screenLogin) screenLogin.classList.remove('hidden');
         if (screenLobby) screenLobby.classList.add('hidden');

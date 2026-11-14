@@ -6,7 +6,7 @@
       "email": "superadmin@ludo.pro",
       "name": "GM Emon",
       "role": "super_admin",
-      "avatar": "\ud83d\udc51",
+      "avatar": "👑",
       "passwordHash": "0eaf0b1dcfd48eeb163c8859c4a265f004111d6c8d049e250bb2a4a44197072405b597863397917374533c23d0f1499df16ad7ede51fd27d75a4eb2acb6472b7",
       "salt": "9e490ecd3e6f999b37bc82daf6a1799a",
       "active": true,
@@ -18,7 +18,7 @@
       "email": "admin@ludo.pro",
       "name": "General Admin",
       "role": "general_admin",
-      "avatar": "\ud83d\udee1\ufe0f",
+      "avatar": "🛡️",
       "passwordHash": "4002ad09bd21516cade870928c80f8e7638f84d0446a83f54ce3d831c9b2ce9a9496c3d3ba59d17f5b7114fa3baeb99b3b6c1956474abbc5d7b499751f01a4e7",
       "salt": "86884719cb6932ccddd18aeaf714a03a",
       "active": true,
@@ -87,119 +87,8 @@
   ],
   "emojis": [
     {
-      "id": "fa_fire",
-      "label": "Fire Blaze",
-      "type": "fontawesome",
-      "content": "fa-solid fa-fire",
-      "soundType": "preset",
-      "soundValue": "sparkle_shield",
-      "size": 48,
-      "active": true
-    },
-    {
-      "id": "fa_laugh",
-      "label": "Laugh Out Loud",
-      "type": "fontawesome",
-      "content": "fa-solid fa-face-laugh-squint",
-      "soundType": "preset",
-      "soundValue": "pop",
-      "size": 48,
-      "active": true
-    },
-    {
-      "id": "fa_crown",
-      "label": "Victory Crown",
-      "type": "fontawesome",
-      "content": "fa-solid fa-crown",
-      "soundType": "preset",
-      "soundValue": "victory",
-      "size": 48,
-      "active": true
-    },
-    {
-      "id": "fa_shield",
-      "label": "Guardian Shield",
-      "type": "fontawesome",
-      "content": "fa-solid fa-shield-halved",
-      "soundType": "preset",
-      "soundValue": "sparkle_shield",
-      "size": 48,
-      "active": true
-    },
-    {
-      "id": "fa_rocket",
-      "label": "Turbo Rocket",
-      "type": "fontawesome",
-      "content": "fa-solid fa-rocket",
-      "soundType": "preset",
-      "soundValue": "cheery_fanfare",
-      "size": 48,
-      "active": true
-    },
-    {
-      "id": "fa_heart",
-      "label": "Love Heart",
-      "type": "fontawesome",
-      "content": "fa-solid fa-heart",
-      "soundType": "preset",
-      "soundValue": "pop",
-      "size": 48,
-      "active": true
-    },
-    {
-      "id": "fa_party",
-      "label": "Celebration",
-      "type": "fontawesome",
-      "content": "fa-solid fa-champagne-glasses",
-      "soundType": "preset",
-      "soundValue": "cheery_fanfare",
-      "size": 48,
-      "active": true
-    },
-    {
-      "id": "fa_bolt",
-      "label": "Thunder Bolt",
-      "type": "fontawesome",
-      "content": "fa-solid fa-bolt",
-      "soundType": "preset",
-      "soundValue": "digital_blip",
-      "size": 48,
-      "active": true
-    },
-    {
-      "id": "fa_star",
-      "label": "Super Star",
-      "type": "fontawesome",
-      "content": "fa-solid fa-star",
-      "soundType": "preset",
-      "soundValue": "sparkle_shield",
-      "size": 52,
-      "active": true
-    },
-    {
-      "id": "fa_dice",
-      "label": "Lucky 6 Dice",
-      "type": "fontawesome",
-      "content": "fa-solid fa-dice",
-      "soundType": "preset",
-      "soundValue": "dice_roll",
-      "size": 48,
-      "active": true
-    },
-    {
-      "id": "em_1794632847883_v99di",
-      "label": "Boom Voice",
-      "type": "fontawesome",
-      "content": "fa-solid fa-bomb",
-      "soundType": "custom",
-      "soundValue": "/uploads/audio/audio_1794632847870_590ukc.mp3",
-      "size": 48,
-      "active": true,
-      "createdAt": "2026-11-14T05:07:27.883Z"
-    },
-    {
       "id": "em_1794635329589_xw0zr",
-      "label": "Happy \u263b",
+      "label": "Happy ☻",
       "type": "sticker",
       "content": "/uploads/emojis/sticker_1794635329561_5ekqpo.webm",
       "soundType": "custom",
@@ -209,76 +98,112 @@
       "createdAt": "2026-11-14T05:48:49.589Z"
     },
     {
-      "id": "em_1794637706528_ljbbd",
-      "label": "Flame Magic (6s)",
-      "type": "fontawesome",
-      "content": "fa-solid fa-fire",
-      "soundType": "preset",
-      "soundValue": "sparkle_shield",
-      "size": 48,
-      "duration": 6,
-      "active": true,
-      "createdAt": "2026-11-14T06:28:26.529Z"
-    },
-    {
-      "id": "em_1794638036803_o2e98",
-      "label": "Flame Magic (6s)",
-      "type": "fontawesome",
-      "content": "fa-solid fa-fire",
-      "soundType": "preset",
-      "soundValue": "sparkle_shield",
-      "size": 48,
-      "duration": 6,
-      "active": true,
-      "createdAt": "2026-11-14T06:33:56.803Z"
-    },
-    {
-      "id": "em_crying_tears",
-      "label": "Crying Tears \ud83d\ude2d",
+      "id": "em_1794672840697_4u1je",
+      "label": "Rag korla",
       "type": "sticker",
-      "content": "/uploads/emojis/sticker_crying_tears.webm",
-      "soundType": "preset",
-      "soundValue": "pop",
-      "size": 64,
-      "duration": 5,
+      "content": "/uploads/emojis/sticker_1794672840696_aboymx.png",
+      "soundType": "custom",
+      "soundValue": "/uploads/audio/audio_1794672840696_ltsx9b.webm",
+      "size": 96,
+      "duration": 1.2,
       "active": true,
-      "createdAt": "2026-11-14T16:06:00.000Z"
+      "createdAt": "2026-11-14T16:14:00.697Z"
+    },
+    {
+      "id": "em_1794672991309_1ho0u",
+      "label": "Cry",
+      "type": "sticker",
+      "content": "/uploads/emojis/sticker_1794672991308_27xjd0.webm",
+      "soundType": "custom",
+      "soundValue": "/uploads/audio/audio_1794672991309_0w0ynk.webm",
+      "size": 96,
+      "duration": 5.7,
+      "active": true,
+      "createdAt": "2026-11-14T16:16:31.309Z"
+    },
+    {
+      "id": "em_1794673330772_jm577",
+      "label": "funny care",
+      "type": "sticker",
+      "content": "/uploads/emojis/sticker_1794673330771_noflcj.webm",
+      "soundType": "custom",
+      "soundValue": "/uploads/audio/audio_1794673330771_8qz2np.webm",
+      "size": 96,
+      "duration": 5.6,
+      "active": true,
+      "createdAt": "2026-11-14T16:22:10.772Z"
+    },
+    {
+      "id": "em_1794673491134_7r6bl",
+      "label": "Chi",
+      "type": "sticker",
+      "content": "/uploads/emojis/sticker_1794673491133_dccq6m.png",
+      "soundType": "custom",
+      "soundValue": "/uploads/audio/audio_1794673491134_wd5tpn.webm",
+      "size": 96,
+      "duration": 1.5,
+      "active": true,
+      "createdAt": "2026-11-14T16:24:51.134Z"
+    },
+    {
+      "id": "em_1794673850014_yb8ug",
+      "label": "Angry",
+      "type": "fontawesome",
+      "content": "fa-solid fa-face-angry",
+      "soundType": "custom",
+      "soundValue": "/uploads/audio/audio_1794673850014_cgqbok.webm",
+      "size": 96,
+      "duration": 4.5,
+      "active": true,
+      "createdAt": "2026-11-14T16:30:50.014Z"
+    },
+    {
+      "id": "em_1794673932272_7tiwo",
+      "label": "Bissas korina",
+      "type": "sticker",
+      "content": "/uploads/emojis/sticker_1794673932271_39zm2l.png",
+      "soundType": "custom",
+      "soundValue": "/uploads/audio/audio_1794673932271_zqvtl4.webm",
+      "size": 96,
+      "duration": 8.1,
+      "active": true,
+      "createdAt": "2026-11-14T16:32:12.272Z"
     }
   ],
   "quickMessages": [
     {
       "id": "qm_1",
-      "text": "Good Game! \ud83d\udc4f",
+      "text": "Good Game! 👏",
       "active": true,
       "order": 1
     },
     {
       "id": "qm_2",
-      "text": "Well Played! \ud83d\udd25",
+      "text": "Well Played! 🔥",
       "active": true,
       "order": 2
     },
     {
       "id": "qm_3",
-      "text": "Roll a 6! \ud83c\udfb2",
+      "text": "Roll a 6! 🎲",
       "active": true,
       "order": 3
     },
     {
       "id": "qm_4",
-      "text": "Hurry Up! \u23f3",
+      "text": "Hurry Up! ⏳",
       "active": true,
       "order": 4
     },
     {
       "id": "qm_5",
-      "text": "Oops! \ud83d\ude05",
+      "text": "Oops! 😅",
       "active": true,
       "order": 5
     },
     {
       "id": "qm_6",
-      "text": "Nice move! \ud83c\udfaf",
+      "text": "Nice move! 🎯",
       "active": true,
       "order": 6
     }

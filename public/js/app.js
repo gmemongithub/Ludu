@@ -160,9 +160,12 @@ window.addEventListener('pointerdown', () => {
 
 // URL Params check for Room Code
 const urlParams = new URLSearchParams(window.location.search);
-const roomParam = urlParams.get('room');
+const roomParam = urlParams.get('room') || urlParams.get('join') || urlParams.get('code');
 if (roomParam && inputRoomCode) {
-  inputRoomCode.value = roomParam.toUpperCase();
+  inputRoomCode.value = roomParam.toUpperCase().trim();
+  const screenLogin = document.getElementById('screen-login');
+  if (screenLogin) screenLogin.classList.add('hidden');
+  if (screenLobby) screenLobby.classList.remove('hidden');
 }
 
 // ============================================================================
@@ -170,7 +173,8 @@ if (roomParam && inputRoomCode) {
 // ============================================================================
 if (btnCreateRoom) {
   btnCreateRoom.onclick = () => {
-    const name = (inputPlayerName.value || '').trim() || 'Emon';
+    const defaultName = (window.currentUser && (window.currentUser.displayName || window.currentUser.name || window.currentUser.username)) || 'Host';
+    const name = (inputPlayerName.value || '').trim() || defaultName;
     myPlayerName = name;
     window.sounds.init();
     socket.emit('create_room', {
@@ -182,25 +186,31 @@ if (btnCreateRoom) {
 
 if (btnJoinRoom) {
   btnJoinRoom.onclick = () => {
-    const name = (inputPlayerName.value || '').trim() || 'Player 2';
     const code = (inputRoomCode.value || '').trim().toUpperCase();
     if (!code) {
       alert('Please enter a 4-letter Room Code.');
       return;
     }
+    const defaultGuestName = (window.currentUser && (window.currentUser.displayName || window.currentUser.name || window.currentUser.username)) || `Guest-${Math.floor(100 + Math.random() * 900)}`;
+    const name = (inputPlayerName.value || '').trim() || defaultGuestName;
     myPlayerName = name;
     window.sounds.init();
+
+    const activeSession = getMatchSession();
+    const isSameRoomReconnect = activeSession && activeSession.roomCode === code;
+
     socket.emit('join_room', {
       roomCode: code,
       playerName: name,
-      userId: (window.currentUser && window.currentUser.id) ? window.currentUser.id : null
+      userId: (window.currentUser && window.currentUser.id) ? window.currentUser.id : null,
+      playerToken: isSameRoomReconnect ? activeSession.playerToken : null
     });
   };
 }
 
 if (btnBackToLobby) {
   btnBackToLobby.onclick = () => {
-    window.location.reload();
+    leaveCurrentMatch();
   };
 }
 
@@ -264,10 +274,45 @@ function copyShareLink(evt) {
   }
 }
 
+function leaveCurrentMatch() {
+  if (socket) {
+    socket.emit('leave_room');
+  }
+  clearMatchSession();
+  currentRoomState = null;
+
+  try {
+    const url = new URL(window.location.href);
+    url.searchParams.delete('room');
+    url.searchParams.delete('join');
+    url.searchParams.delete('code');
+    window.history.replaceState({}, document.title, url.pathname);
+  } catch(e) {}
+
+  const screenLogin = document.getElementById('screen-login');
+  if (screenLogin) screenLogin.classList.add('hidden');
+  if (screenWaiting) screenWaiting.classList.add('hidden');
+  if (screenGame) screenGame.classList.add('hidden');
+  if (modalMenu) modalMenu.classList.add('hidden');
+  if (screenLobby) screenLobby.classList.remove('hidden');
+
+  showToast('Returned to lobby.');
+}
+window.leaveCurrentMatch = leaveCurrentMatch;
+
 if (btnFigmaBack) {
   btnFigmaBack.onclick = () => {
-    if (confirm('Leave current Ludo match?')) {
-      window.location.reload();
+    if (confirm('Leave current Ludo match and return to lobby?')) {
+      leaveCurrentMatch();
+    }
+  };
+}
+
+const btnDrawerLeaveMatch = document.getElementById('btn-drawer-leave-match');
+if (btnDrawerLeaveMatch) {
+  btnDrawerLeaveMatch.onclick = () => {
+    if (confirm('Leave current Ludo match and return to lobby?')) {
+      leaveCurrentMatch();
     }
   };
 }
@@ -623,12 +668,12 @@ document.querySelectorAll('.rx-pill').forEach(pill => {
 // Victory Modal Actions
 if (btnVictoryAgain) {
   btnVictoryAgain.onclick = () => {
-    window.location.reload();
+    leaveCurrentMatch();
   };
 }
 if (btnVictoryHome) {
   btnVictoryHome.onclick = () => {
-    window.location.reload();
+    leaveCurrentMatch();
   };
 }
 
@@ -1059,6 +1104,10 @@ function renderState(state) {
     myColor = me.color;
     window.myColor = myColor;
   }
+
+  // Ensure gateway/login screen is always hidden when room is active
+  const screenLogin = document.getElementById('screen-login');
+  if (screenLogin) screenLogin.classList.add('hidden');
 
   if (state.status === 'waiting') {
     screenLobby.classList.add('hidden');
