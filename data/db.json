@@ -6,7 +6,7 @@
       "email": "superadmin@ludo.pro",
       "name": "GM Emon",
       "role": "super_admin",
-      "avatar": "👑",
+      "avatar": "\ud83d\udc51",
       "passwordHash": "0eaf0b1dcfd48eeb163c8859c4a265f004111d6c8d049e250bb2a4a44197072405b597863397917374533c23d0f1499df16ad7ede51fd27d75a4eb2acb6472b7",
       "salt": "9e490ecd3e6f999b37bc82daf6a1799a",
       "active": true,
@@ -18,7 +18,7 @@
       "email": "admin@ludo.pro",
       "name": "General Admin",
       "role": "general_admin",
-      "avatar": "🛡️",
+      "avatar": "\ud83d\udee1\ufe0f",
       "passwordHash": "4002ad09bd21516cade870928c80f8e7638f84d0446a83f54ce3d831c9b2ce9a9496c3d3ba59d17f5b7114fa3baeb99b3b6c1956474abbc5d7b499751f01a4e7",
       "salt": "86884719cb6932ccddd18aeaf714a03a",
       "active": true,
@@ -199,7 +199,7 @@
     },
     {
       "id": "em_1794635329589_xw0zr",
-      "label": "Happy ☻",
+      "label": "Happy \u263b",
       "type": "sticker",
       "content": "/uploads/emojis/sticker_1794635329561_5ekqpo.webm",
       "soundType": "custom",
@@ -231,42 +231,54 @@
       "duration": 6,
       "active": true,
       "createdAt": "2026-11-14T06:33:56.803Z"
+    },
+    {
+      "id": "em_crying_tears",
+      "label": "Crying Tears \ud83d\ude2d",
+      "type": "sticker",
+      "content": "/uploads/emojis/sticker_crying_tears.webm",
+      "soundType": "preset",
+      "soundValue": "pop",
+      "size": 64,
+      "duration": 5,
+      "active": true,
+      "createdAt": "2026-11-14T16:06:00.000Z"
     }
   ],
   "quickMessages": [
     {
       "id": "qm_1",
-      "text": "Good Game! 👏",
+      "text": "Good Game! \ud83d\udc4f",
       "active": true,
       "order": 1
     },
     {
       "id": "qm_2",
-      "text": "Well Played! 🔥",
+      "text": "Well Played! \ud83d\udd25",
       "active": true,
       "order": 2
     },
     {
       "id": "qm_3",
-      "text": "Roll a 6! 🎲",
+      "text": "Roll a 6! \ud83c\udfb2",
       "active": true,
       "order": 3
     },
     {
       "id": "qm_4",
-      "text": "Hurry Up! ⏳",
+      "text": "Hurry Up! \u23f3",
       "active": true,
       "order": 4
     },
     {
       "id": "qm_5",
-      "text": "Oops! 😅",
+      "text": "Oops! \ud83d\ude05",
       "active": true,
       "order": 5
     },
     {
       "id": "qm_6",
-      "text": "Nice move! 🎯",
+      "text": "Nice move! \ud83c\udfaf",
       "active": true,
       "order": 6
     }
