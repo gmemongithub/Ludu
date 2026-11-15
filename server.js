@@ -9,7 +9,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, { cors: { origin: '*' } });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || process.env.SERVER_PORT || 61594;
 
 app.use(express.json({ limit: '25mb' }));
 app.use(express.urlencoded({ extended: true, limit: '25mb' }));
@@ -1494,3 +1494,17 @@ function handleBotTurnIfApplicable(room) {
 server.listen(PORT, '0.0.0.0', () => {
   console.log(`🎮 Ludo Live Master Engine running on http://localhost:${PORT}`);
 });
+
+if (Number(PORT) !== 3000) {
+  try {
+    const fallbackServer = http.createServer(app);
+    io.attach(fallbackServer);
+    fallbackServer.listen(3000, '0.0.0.0', () => {
+      console.log(`🎮 Fallback Listener running on http://localhost:3000`);
+    }).on('error', () => {
+      // Port 3000 unavailable or restricted in this environment, ignore safely
+    });
+  } catch (err) {
+    // Secondary listener failed, primary port is already running
+  }
+}
